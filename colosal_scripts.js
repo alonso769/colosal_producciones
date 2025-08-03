@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Manejo del menú de navegación móvil
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('.nav');
 
@@ -7,37 +8,50 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('active');
         });
     }
-});
 
-
-document.addEventListener('DOMContentLoaded', () => {
+    // Lógica para el cambio de imagen dinámico
     const mainImage = document.getElementById('main-image');
     const menuButtons = document.querySelectorAll('.menu-btn');
+    
+    // Obtener la imagen inicial
+    const initialImageSrc = mainImage.src;
 
     menuButtons.forEach(button => {
         button.addEventListener('click', () => {
             const newImageSrc = button.getAttribute('data-image');
-            
-            // Si la imagen actual es la misma, no hacemos nada
+
+            // Si la imagen actual ya es la que se va a cargar, no hacemos nada
             if (mainImage.src.includes(newImageSrc)) {
                 return;
             }
 
-            // Paso 1: Desvanece la imagen actual
+            // Desvanece la imagen actual
             mainImage.style.opacity = '0';
 
-            // Paso 2: Espera a que la transición de desvanecimiento termine
+            // Después de la transición, cambia la fuente de la imagen y vuelve a mostrarla
             setTimeout(() => {
-                // Crea una nueva imagen temporal para precargar la nueva fuente
-                const tempImage = new Image();
-                tempImage.src = newImageSrc;
-
-                // Cuando la nueva imagen se cargue, la asignamos y la mostramos
-                tempImage.onload = () => {
-                    mainImage.src = newImageSrc;
-                    mainImage.style.opacity = '1';
-                };
-            }, 500); // 500ms debe coincidir con la duración de la transición en CSS
+                mainImage.src = newImageSrc;
+                mainImage.style.opacity = '1';
+            }, 500); // El tiempo debe coincidir con la transición CSS
         });
     });
+
+    // Lógica para la reproducción automática del video en dispositivos móviles
+    const video = document.getElementById('background-video');
+
+    if (video) {
+        video.muted = true; // Asegura que esté silenciado para autoplay
+        
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.error("Autoplay falló:", error);
+                // Si la reproducción automática falla, se intentará de nuevo en el primer clic.
+                document.body.addEventListener('click', () => {
+                    video.play().catch(e => console.error("No se pudo reproducir el video con el clic del usuario", e));
+                }, { once: true });
+            });
+        }
+    }
 });
