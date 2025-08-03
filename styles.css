@@ -945,15 +945,18 @@ input[type="number"]::-webkit-inner-spin-button {
     }
 }
 
+.mobile-menu-btn {
+    display: none !important;
+}
 @media (max-width: 768px) {
     /* Oculta los elementos de navegación en escritorio */
     .nav, .auth-buttons {
         display: none;
     }
 
-    /* Muestra el botón de menú móvil */
+   /* Mobile Menu Button */
     .mobile-menu-btn {
-        display: block;
+        display: block !important;
         position: absolute;
         right: 20px;
         top: 50%;
@@ -961,7 +964,7 @@ input[type="number"]::-webkit-inner-spin-button {
         background: none;
         border: none;
         font-size: 2rem;
-        color: var(--color-off-white);
+        color: var(--color-off-white); /* Botón blanco hueso */
         cursor: pointer;
         z-index: 1002;
     }
