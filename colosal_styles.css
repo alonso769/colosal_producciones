@@ -1,0 +1,772 @@
+/* Custom Colors */
+:root {
+    --color-black: #000;
+    --color-off-white: #f5f5dc; /* Blanco Hueso */
+    --color-pastel-purple: #dda0dd; /* Morado Pastel */
+    --color-dark-gray: #222;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--color-off-white);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- Estilos para el video de fondo --- */
+.video-background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Superposición oscura para mejorar la legibilidad del texto */
+.video-background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    background: var(--color-black);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.logo .joinnus-header-logo {
+    height: 40px;
+    filter: brightness(0) invert(1);
+    width: auto;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--color-off-white);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-pastel-purple);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-off-white);
+    cursor: pointer;
+}
+
+/* NUEVOS ESTILOS PARA EL TITULO ARRIBA DEL CARRUSEL */
+.carousel-title-top {
+    font-size: 3rem;
+    color: var(--color-pastel-purple);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem; /* Espacio para separar del carrusel */
+}
+
+/* --- ESTILOS DEL CARRUSEL EN RUEDA Y LA SECCIÓN --- */
+.carousel-section {
+    background-color: transparent;
+    padding: 8rem 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem; /* Espacio entre los elementos */
+}
+
+/* El carrusel se mantiene como estaba */
+.carousel-container-3d {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg) translateZ(-100px);
+    animation: carousel-spin 30s linear infinite;
+}
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.8s ease;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(100px); }
+.carousel-item:nth-child(2) { transform: rotateY(72deg) translateZ(100px); }
+.carousel-item:nth-child(3) { transform: rotateY(144deg) translateZ(100px); }
+.carousel-item:nth-child(4) { transform: rotateY(216deg) translateZ(100px); }
+.carousel-item:nth-child(5) { transform: rotateY(288deg) translateZ(100px); }
+
+@keyframes carousel-spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* --- ESTILOS DE LA SECCIÓN PARA LOS DISCOS Y TÍTULO --- */
+.disc-and-title-section {
+    position: relative;
+    padding: 2rem 0 4rem;
+    text-align: center;
+}
+
+.disc-title {
+    font-size: 3rem;
+    color: var(--color-pastel-purple);
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.three-discs-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+}
+
+.side-disc-container {
+    width: 150px;
+    height: 150px;
+    z-index: 1;
+}
+
+.side-disc-container.disc-center {
+    width: 200px;
+    height: 200px;
+    transform: translateY(-20px);
+    z-index: 2;
+}
+
+.rotating-vinyl {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    animation: rotate-disc 15s linear infinite;
+}
+
+@keyframes rotate-disc {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- ESTILOS DE LA SECCIÓN DE INFORMACIÓN --- */
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem 0;
+    position: relative;
+    gap: 2rem;
+}
+
+.info-image {
+    width: 35%;
+}
+
+.info-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.info-content {
+    width: 45%;
+    text-align: left;
+}
+
+.info-content h2 {
+    font-size: 3rem;
+    color: var(--color-pastel-purple);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.info-content p {
+    font-size: 1.1rem;
+    color: var(--color-off-white);
+    margin-bottom: 2rem;
+}
+
+.info-link {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--color-pastel-purple);
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.info-link:hover {
+    background-color: var(--color-off-white);
+}
+
+/* --- ESTILOS DE LA GALERÍA Y FORMULARIO (Sin cambios) --- */
+.event-gallery {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.gallery-title {
+    font-size: 2.5rem;
+    color: var(--color-pastel-purple);
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.opinion-form-section {
+    background: transparent;
+    padding: 6rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.form-content {
+    margin-bottom: 2rem;
+}
+
+.form-logo {
+    height: 60px;
+    filter: brightness(0) invert(1);
+    margin-bottom: 1rem;
+}
+
+.opinion-form-section h2 {
+    font-size: 2.5rem;
+    color: var(--color-pastel-purple);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.opinion-form-section p {
+    font-size: 1.1rem;
+    color: var(--color-off-white);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.opinion-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border: 1px solid var(--color-dark-gray);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-off-white);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-pastel-purple);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--color-off-white);
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-off-white);
+    box-shadow: 0 0 5px var(--color-pastel-purple);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--color-pastel-purple);
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+}
+
+.submit-btn:hover {
+    background-color: var(--color-off-white);
+    transform: translateY(-2px);
+}
+
+/* --- ESTILOS ADICIONALES PARA LAS IMAGENES CON MARCO ROTO --- */
+
+/* Animación de "llamas" para las imágenes de marco roto */
+@keyframes flame-flicker {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: scale(1.005) rotate(0.5deg);
+        opacity: 0.98;
+    }
+    50% {
+        transform: scale(0.995) rotate(-0.5deg);
+        opacity: 1.02;
+    }
+    75% {
+        transform: scale(1.002) rotate(0.2deg);
+        opacity: 0.99;
+    }
+}
+
+.image-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    z-index: 10;
+    overflow: hidden;
+    /* Aplica la animación aquí */
+    animation: flame-flicker 2s ease-in-out infinite;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* La magia de las formas irregulares con clip-path para un marco roto */
+.broken-frame.image-container-left {
+    clip-path: polygon(
+        10% 0,
+        95% 5%,
+        100% 20%,
+        90% 40%,
+        100% 60%,
+        95% 80%,
+        85% 100%,
+        10% 90%,
+        0% 70%,
+        5% 45%,
+        0% 20%
+    );
+}
+
+.broken-frame.image-container-right {
+    clip-path: polygon(
+        5% 5%,
+        90% 0,
+        100% 20%,
+        100% 40%,
+        95% 60%,
+        100% 80%,
+        90% 100%,
+        5% 90%,
+        0% 70%,
+        10% 50%,
+        0% 25%
+    );
+}
+
+/* --- Media Queries para adaptar a móviles --- */
+@media (max-width: 992px) {
+    .carousel-title-top {
+        font-size: 1.8rem;
+    }
+
+    /* Ajustes para la sección del carrusel en móvil */
+    .carousel-section {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    /* CAMBIO CLAVE: Se ajusta el tamaño de las imágenes del marco roto en móvil */
+    .image-container-left,
+    .image-container-right {
+        width: 95%; /* Ocupa más ancho de los costados */
+        height: 220px; /* Aumenta la altura para que se vea más grande */
+        margin: 0 auto;
+    }
+    
+    /* El orden de los elementos se cambia para que aparezcan arriba y abajo del carrusel */
+    .carousel-container-3d {
+        order: 2;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .image-container-left {
+        order: 1;
+    }
+
+    .image-container-right {
+        order: 3;
+    }
+
+    /* Otros ajustes generales para móvil */
+    .info-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-image, .info-content {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .info-content {
+        text-align: center;
+    }
+
+    .disc-title {
+        font-size: 2rem;
+    }
+
+    .three-discs-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .side-disc-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .side-disc-container.disc-center {
+        width: 200px;
+        height: 200px;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--color-dark-gray);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+    .nav.active {
+        display: flex;
+    }
+    .nav-link {
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+    }
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .carousel-section {
+        padding: 4rem 0;
+    }
+
+    .info-content h2,
+    .gallery-title,
+    .opinion-form-section h2 {
+        font-size: 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos para el contenedor principal del menú */
+.menu-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Contenedor de la imagen y los botones */
+.image-container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+    border: 5px solid #C9A0DC;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+    
+    /* --- CAMBIO AQUÍ: Fondo con los parlantes --- */
+    background-image: url('images/background-con-parlantes.jpg'); /* Reemplaza con la ruta de tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    /* --- FIN DEL CAMBIO --- */
+}
+
+/* Efecto hover en el marco */
+.image-container:hover {
+    border-color: #F5F5DC;
+    box-shadow: 0 0 25px rgba(245, 245, 220, 0.8);
+}
+
+/* La imagen dinámica */
+#main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Asegura que la imagen completa se muestre */
+    transition: opacity 0.5s ease-in-out;
+    filter: brightness(0.6);
+}
+
+/* Estilos para el título dinámico */
+.image-title {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #F5F5DC;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    z-index: 15;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Estilos para el contenedor de los botones superpuesto */
+.menu-buttons {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 10;
+}
+
+/* Estilos de los botones */
+.menu-buttons button {
+    background: #C9A0DC;
+    color: #F5F5DC;
+    border: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    text-align: left;
+    transform: none; 
+}
+
+.menu-buttons button:hover {
+    background: #000;
+    color: #C9A0DC;
+    box-shadow: 0 0 10px #C9A0DC;
+}
+
+/* Efecto de "clavado a la pantalla con rajaduras" */
+.crack-overlay {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: url('images/crack.png') no-repeat;
+    background-size: contain;
+    z-index: 20;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+}
+
+.crack-overlay.top-left {
+    top: -15px;
+    left: -15px;
+    transform: rotate(0deg);
+}
+
+.crack-overlay.top-right {
+    top: -15px;
+    right: -15px;
+    transform: rotate(90deg);
+}
+
+.crack-overlay.bottom-left {
+    bottom: -15px;
+    left: -15px;
+    transform: rotate(270deg);
+}
+
+.crack-overlay.bottom-right {
+    bottom: -15px;
+    right: -15px;
+    transform: rotate(180deg);
+}
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .image-container {
+        height: 70vh;
+        width: 95%;
+    }
+
+    .image-title {
+        font-size: 2rem;
+    }
+
+    .menu-buttons {
+        top: 85%;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 90%;
+    }
+
+    .menu-buttons button {
+        width: auto;
+        font-size: 14px;
+        padding: 8px 15px;
+        text-align: center;
+    }
+    
+    .crack-overlay {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Estilos para el contenedor principal. Esto apilará los elementos verticalmente. */
+.menu-screen {
+    display: flex;
+    flex-direction: column; /* Esto hace que los elementos se apilen en una columna */
+    justify-content: center;
+    align-items: center; /* Centra los elementos horizontalmente */
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilos para el nuevo título */
+.colosal-title {
+    color: white; /* Color blanco para que se vea */
+    font-size: 3rem; /* Tamaño de fuente grande */
+    text-align: center;
+    margin-bottom: 20px; /* Espacio para separar el título del cuadro de imagen */
+    text-shadow: 2px 2px 4px #000000; /* Sombra para que destaque */
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Historia | Ralph's Sanguchería</title>
+  <link rel="shortcut icon" href="img/minilogo.png" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      background: url('romance/grupal.jpg') no-repeat center center/cover;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.65);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1s ease-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #faf3d8;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .btn-regresar {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 24px;
+      background-color: #df99e0;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      text-align: center;
+      max-width: 250px;
+    }
+
+    .btn-regresar:hover {
+      background-color: #c303ee;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .btn-regresar {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>Nuestra Historia</h1>
+      <p>
+        Colosal Producciones nació en el corazón de Lima en el año 2015 con una misión clara: ofrecer los mejores eventos de bandas emo del Perú con una producción impecable, un sonido auténtico y una experiencia inigualable. Todo comenzó con un pequeño equipo de apasionados por la música en un rincón de Barranco, donde la energía de las bandas y la dedicación del equipo conquistaban a los asistentes desde el primer acorde.
+      </p>
+      <p>
+        Lo que comenzó con solo tres eventos al año, pronto se convirtió en una explosión de creatividad musical. Nuestras bandas y su público se volvieron parte de nuestra familia, y su entusiasmo nos impulsó a mejorar cada día. Gracias al boca a boca, Colosal Producciones se convirtió en un referente local, reconocido por su pasión por el rock, la gestión de talentos emergentes y una visión que combina la nostalgia emo con un toque moderno.
+      </p>
+      <p>
+       En 2018 produjimos nuestro primer festival de gran escala, y desde entonces no hemos parado de crecer. Hoy hemos colaborado con varias bandas en Lima y seguimos expandiendo nuestra presencia en otras regiones del país. Pero lo más importante es que jamás hemos perdido de vista nuestra esencia: calidez humana, apoyo a la escena local y una experiencia que te hace sentir parte de algo grande.
+      </p>
+      <p>
+        En Colosal Producciones creemos que un buen concierto puede alegrar tu vida. Por eso, cada banda que seleccionamos es elegida cuidadosamente, cada producción es planeada hasta el último detalle, y cada asistente es recibido con la mejor energía. Esta es nuestra historia… y apenas comienza.
+      </p>
+      <a href="index.html?from=historia" class="btn-regresar">← Volver al Inicio</a>
+    </div>
+  </div>
+</body>
+</html>
