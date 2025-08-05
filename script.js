@@ -1,8 +1,6 @@
-// Joinnus Clone JavaScript
-
 // --- Global Event Data ---
-// Define tus eventos aquí. Cada objeto debe tener un ID único
-// y todos los detalles que quieres mostrar en la página de detalles.
+// Define tus eventos aquí. Cada objeto debe tener un ID único y todos los detalles que quieres mostrar en la página de detalles.
+
 const eventsData = [
     {
         id: 'band-event-1',
@@ -173,13 +171,12 @@ const eventsData = [
             { name: 'BAR CRAWL LIMA TICKETS', price: 80.00 },
             { name: 'BAR CRAWL LIMA TICKETS - Gratidays', price: 54.00 }
         ],
-        organizer: 'Colosal Producciones', // O el organizador real si es diferente
-        mapCoords: [-12.1466, -77.0229] // Coordenadas del Parque Municipal de Barranco
+        organizer: 'Colosal Producciones',
+        mapCoords: [-12.1466, -77.0229]
     }
 ];
 
 // --- General DOM Elements (used across pages) ---
-// Estos elementos solo existen en index.html, así que los seleccionamos condicionalmente
 const carouselTrack = document.querySelector('.carousel-track');
 let carouselSlides = carouselTrack ? Array.from(document.querySelectorAll('.carousel-slide')) : [];
 const nextButton = document.querySelector('.carousel-button.next');
@@ -195,7 +192,6 @@ const AUTO_SLIDE_DELAY = 3000;
 function setupCarousel() {
     if (carouselSlides.length > 0) {
         slideWidth = carouselSlides[0].getBoundingClientRect().width;
-        // Adjust initial position to show the first real slide (after the cloned last one)
         carouselTrack.style.transform = `translateX(-${slideWidth}px)`;
     }
 }
@@ -228,7 +224,6 @@ function cloneSlides() {
 
 function moveToSlide(targetIndex) {
     if (carouselTrack) {
-        // The +1 accounts for the cloned last slide at the beginning
         carouselTrack.style.transform = `translateX(-${(targetIndex + 1) * slideWidth}px)`;
         updateDots(targetIndex);
         currentIndex = targetIndex;
@@ -245,45 +240,42 @@ function updateDots(targetIndex) {
 }
 
 function createDots() {
-    // Create dots only for the original slides, not the clones
-    if (dotsContainer && carouselSlides.length > 2) { // More than 2 because of the 2 cloned slides
+    if (dotsContainer && carouselSlides.length > 2) {
         dotsContainer.innerHTML = '';
-        // Loop through original slides (total slides - 2 cloned)
         for (let i = 0; i < carouselSlides.length - 2; i++) {
             const dot = document.createElement('span');
             dot.classList.add('dot');
             dot.dataset.index = i;
             dot.addEventListener('click', () => {
                 moveToSlide(i);
-                stopAutoSlide(); // Stop and restart on manual dot click
+                stopAutoSlide();
                 startAutoSlide();
             });
             dotsContainer.appendChild(dot);
         }
-        updateDots(currentIndex); // Set initial active dot
+        updateDots(currentIndex);
     }
 }
 
 function slideNext() {
     let newIndex = currentIndex + 1;
-    // Check if we are at the last real slide
+
     if (newIndex >= carouselSlides.length - 2) {
-        newIndex = 0; // Wrap around to the first real slide
+        newIndex = 0;
     }
     moveToSlide(newIndex);
 }
 
 function slidePrev() {
     let newIndex = currentIndex - 1;
-    // Check if we are at the first real slide
     if (newIndex < 0) {
-        newIndex = carouselSlides.length - 3; // Wrap around to the last real slide (before cloned one)
+        newIndex = carouselSlides.length - 3;
     }
     moveToSlide(newIndex);
 }
 
 function startAutoSlide() {
-    stopAutoSlide(); // Clear any existing interval to prevent multiple intervals
+    stopAutoSlide();
     autoSlideInterval = setInterval(() => {
         slideNext();
     }, AUTO_SLIDE_DELAY); 
@@ -293,20 +285,19 @@ function stopAutoSlide() {
     clearInterval(autoSlideInterval);
 }
 
-// Event listeners for carousel navigation buttons
 if (nextButton) {
     nextButton.addEventListener('click', () => {
         slideNext();
-        stopAutoSlide(); // Stop auto-slide on manual navigation
-        startAutoSlide(); // Restart auto-slide after manual interaction
+        stopAutoSlide();
+        startAutoSlide();
     });
 }
 
 if (prevButton) {
     prevButton.addEventListener('click', () => {
         slidePrev();
-        stopAutoSlide(); // Stop auto-slide on manual navigation
-        startAutoSlide(); // Restart auto-slide after manual interaction
+        stopAutoSlide();
+        startAutoSlide();
     });
 }
 
@@ -317,30 +308,26 @@ if (carouselTrack) {
         const currentX = matrix.m41;
         const visibleClonedIndex = Math.round(Math.abs(currentX) / slideWidth);
 
-        // If we are on the cloned first slide (which is visually the original last slide)
-        if (visibleClonedIndex === carouselSlides.length - 1) { // Index of the cloned first slide (at the end)
+        if (visibleClonedIndex === carouselSlides.length - 1) {
             carouselTrack.style.transition = 'none';
-            carouselTrack.style.transform = `translateX(-${slideWidth}px)`; // Jump to the real first slide
+            carouselTrack.style.transform = `translateX(-${slideWidth}px)`;
             currentIndex = 0;
             updateDots(currentIndex);
         } 
-        // If we are on the cloned last slide (which is visually the original first slide)
-        else if (visibleClonedIndex === 0) { // Index of the cloned last slide (at the beginning)
+
+        else if (visibleClonedIndex === 0) {
             carouselTrack.style.transition = 'none';
-            carouselTrack.style.transform = `translateX(-${(carouselSlides.length - 2) * slideWidth}px)`; // Jump to the real last slide
-            currentIndex = carouselSlides.length - 3; // Adjust to the last original slide's index
+            carouselTrack.style.transform = `translateX(-${(carouselSlides.length - 2) * slideWidth}px)`;
+            currentIndex = carouselSlides.length - 3;
             updateDots(currentIndex);
         }
         
-        // Re-enable transition after a very small delay to allow the jump to render
         setTimeout(() => {
             carouselTrack.style.transition = 'transform 0.5s ease-in-out';
         }, 50);
     });
 }
 
-// --- New Gallery Carousel Logic ---
-// This assumes a separate gallery carousel with its own buttons/track
 let galleryCarouselTrack = document.querySelector('.gallery-carousel-track');
 let galleryCarouselSlides = galleryCarouselTrack ? Array.from(document.querySelectorAll('.gallery-carousel-slide')) : [];
 let galleryCurrentIndex = 0;
@@ -387,9 +374,7 @@ if (galleryPrevButton) {
     galleryPrevButton.addEventListener('click', slideGalleryPrev);
 }
 
-
-// --- Event Details Page Specific Logic ---
-let currentMap = null; // Variable para almacenar la instancia del mapa
+let currentMap = null;
 
 function setupEventDetailsPage() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -462,6 +447,34 @@ function setupEventDetailsPage() {
         });
         totalPriceSpan.textContent = `S/ ${total.toFixed(2)}`;
     }
+    
+    // --- NUEVO CÓDIGO AÑADIDO: Formulario de datos personales ---
+    const ticketPurchaseCard = document.querySelector('.ticket-purchase-card');
+    const userDetailsContainer = document.createElement('div');
+    userDetailsContainer.classList.add('user-details-form');
+    userDetailsContainer.innerHTML = `
+        <h3>Datos del comprador</h3>
+        <div class="form-group">
+            <label for="full-name">Nombre completo:</label>
+            <input type="text" id="full-name" placeholder="Tu nombre completo" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" placeholder="tu.correo@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Número de teléfono:</label>
+            <input type="tel" id="phone" placeholder="999-999-999" required>
+        </div>
+    `;
+    // Insertar el formulario antes de los checkboxes (ajustamos el DOM)
+    if (privacyConsent) {
+        ticketPurchaseCard.insertBefore(userDetailsContainer, privacyConsent.closest('p'));
+    } else {
+        ticketPurchaseCard.insertBefore(userDetailsContainer, discountToggle);
+    }
+    // --- FIN DEL CÓDIGO AÑADIDO ---
+
 
     // Re-attach event listeners for newly created quantity selectors
     document.querySelectorAll('.quantity-selector').forEach(selector => {
@@ -494,10 +507,23 @@ function setupEventDetailsPage() {
 
     if (purchaseBtn) {
         purchaseBtn.addEventListener('click', () => {
+             // Validación de entradas seleccionadas
             if (total === 0) {
                 alert('Por favor, selecciona al menos una entrada para comprar.');
                 return;
             }
+
+            // Obtener y validar datos del formulario
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!fullName || !email || !phone) {
+                alert('Por favor, completa todos los datos del comprador.');
+                return;
+            }
+            
+            // Validación de los consentimientos
             if (!privacyConsent || !privacyConsent.checked) {
                 alert('Debes aceptar la política de privacidad para continuar.');
                 return;
@@ -506,7 +532,50 @@ function setupEventDetailsPage() {
                 alert('Debes confirmar que eres mayor de 18 años para comprar entradas.');
                 return;
             }
-            alert(`Compra simulada por un total de: S/ ${total.toFixed(2)}\n¡Gracias por tu compra!`);
+            
+            // --- Generación del mensaje para WhatsApp ---
+            
+            // Número de teléfono de la empresa para WhatsApp
+            const whatsappNumber = '51984291729'; 
+
+            // Recopilar los detalles de la compra
+            const orderDetails = [];
+            document.querySelectorAll('.ticket-quantity').forEach((input, index) => {
+                const quantity = parseInt(input.value);
+                if (quantity > 0) {
+                    const ticketName = selectedEvent.tickets[index].name;
+                    const ticketPrice = selectedEvent.tickets[index].price;
+                    orderDetails.push(`${quantity}x ${ticketName} (S/ ${ticketPrice.toFixed(2)})`);
+                }
+            });
+
+            // Crear el mensaje de la boleta
+            const message = `
+*SOLICITUD DE COMPRA - COLOSAL*
+
+*Evento:* ${selectedEvent.title}
+*Fecha:* ${selectedEvent.dateTime}
+*Ubicación:* ${selectedEvent.address}
+
+*Detalle del pedido:*
+${orderDetails.join('\n')}
+
+*Total a pagar:* S/ ${total.toFixed(2)}
+
+*Datos del comprador:*
+Nombre: ${fullName}
+Correo: ${email}
+Teléfono: ${phone}
+
+Hola, estoy interesado en comprar entradas para este evento.
+`;
+            
+            // Codificar el mensaje para la URL de WhatsApp
+            const encodedMessage = encodeURIComponent(message.trim());
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+            // Abrir la ventana de WhatsApp
+            window.open(whatsappUrl, '_blank');
         });
     }
 
@@ -523,7 +592,6 @@ function setupEventDetailsPage() {
             }
         });
     }
-
     // Initial calculation
     calculateTotal();
     
@@ -546,12 +614,11 @@ function setupEventDetailsPage() {
         
         // Actualizar enlace de Google Maps
         if (viewMapLink) {
-            // Asegúrate de que esta URL sea correcta. Usualmente es https://www.google.com/maps/search/?api=1&query=LAT,LONG
+            // El enlace que me proporcionaste es incorrecto, lo he corregido a un formato más estándar.
             viewMapLink.href = `https://www.google.com/maps/search/?api=1&query=${selectedEvent.mapCoords[0]},${selectedEvent.mapCoords[1]}`;
         }
     }
 }
-
 
 // --- General Interactions (apply to both pages) ---
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -597,16 +664,13 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe only elements relevant to the current page if needed
 document.querySelectorAll('.event-card, .upcoming-event-card').forEach(el => {
     observer.observe(el);
 });
 
-// For the new gallery elements
 document.querySelectorAll('.gallery-carousel-slide, .collage-item').forEach(el => {
     observer.observe(el);
 });
-
 
 function createMobileMenu() {
     const nav = document.querySelector('.nav');
@@ -646,32 +710,11 @@ function createMobileMenu() {
                 mobileMenuBtn.innerHTML = '☰'; // Reset icon in case it was '✕'
                 mobileMenuBtn.setAttribute('aria-label', 'Abrir menú móvil');
             }
-            // For smaller screens, the toggle handles the state
         }
     }
-    
     window.addEventListener('resize', checkScreenSize);
     checkScreenSize(); // Initial check on load
 }
-
-console.log(`
-🎉 ¡Bienvenido al clon de Joinnus!
-🚀 Esta es una plataforma de descubrimiento de eventos de música.
-💻 Construida con HTML, CSS y JavaScript.
-📱 Diseño totalmente responsive.
-✨ Características interactivas incluidas.
-
-Características:
-- Carrusel de imágenes (hero y galería).
-- Sección de próximos conciertos de la banda.
-- Página de detalles de evento con compra simulada.
-- Mapa interactivo de ubicación.
-- Diseño responsive.
-- Animaciones suaves.
-- Navegación amigable para móviles.
-- Galería de imágenes con collage.
-`);
-
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
