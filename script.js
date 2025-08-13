@@ -12,10 +12,20 @@ const eventsData = [
         fullAddress: 'Av. Bolognesi 123, Barranco',
         description: `Prepárate para una noche inolvidable con la banda de rock peruana más aclamada del momento. Disfruta de sus grandes éxitos y nuevas canciones en un ambiente vibrante. Un espectáculo lleno de energía y pasión por la música.`,
         additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.`,
-        tickets: [
-            { name: 'Entrada General', price: 90.00 },
-            { name: 'Entrada VIP (Acceso backstage)', price: 150.00 }
+        
+        // --- NUEVA ESTRUCTURA DE PREVENTAS (ADAPTADO CON HORAS PARA PRUEBA) ---
+        // Aquí defines las etapas de preventa con su precio y fecha de finalización
+        // La fecha debe ser un objeto Date para poder compararla
+        presaleStages: [
+            // PRUEBA 1: Esta preventa ya ha pasado (17:20:00). No debería mostrarse.
+            { name: 'Preventa 1', price: 90.00, endDate: new Date('2025-08-13T17:20:00') },
+            // PRUEBA 2: Esta preventa es la activa en este momento (hasta las 17:30:00).
+            { name: 'Preventa 2', price: 100.00, endDate: new Date('2025-08-13T17:50:00') },
+            // PRUEBA 3: Esta preventa se activará después de las 17:30:00.
+            { name: 'Preventa 3', price: 114.00, endDate: new Date('2025-08-13T17:52:00') }
         ],
+        regularPrice: { name: 'Entrada General', price: 120.00 }, // Precio que se activa después de las preventas
+        
         organizer: 'Colosal Producciones',
         mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
     },
@@ -175,7 +185,6 @@ const eventsData = [
         mapCoords: [-12.1466, -77.0229]
     }
 ];
-
 // --- General DOM Elements (used across pages) ---
 const carouselTrack = document.querySelector('.carousel-track');
 let carouselSlides = carouselTrack ? Array.from(document.querySelectorAll('.carousel-slide')) : [];
@@ -207,10 +216,8 @@ function cloneSlides() {
 
         carouselTrack.appendChild(firstSlide);
         carouselTrack.insertBefore(lastSlide, carouselSlides[0]);
-        
         // Re-get all slides including clones
         carouselSlides = Array.from(document.querySelectorAll('.carousel-slide'));
-
         // Reset transition to instantly jump to the correct starting position
         carouselTrack.style.transition = 'none';
         carouselTrack.style.transform = `translateX(-${slideWidth}px)`;
@@ -259,7 +266,6 @@ function createDots() {
 
 function slideNext() {
     let newIndex = currentIndex + 1;
-
     if (newIndex >= carouselSlides.length - 2) {
         newIndex = 0;
     }
@@ -278,7 +284,7 @@ function startAutoSlide() {
     stopAutoSlide();
     autoSlideInterval = setInterval(() => {
         slideNext();
-    }, AUTO_SLIDE_DELAY); 
+    }, AUTO_SLIDE_DELAY);
 }
 
 function stopAutoSlide() {
@@ -366,7 +372,6 @@ function slideGalleryPrev() {
 // Add event listeners for gallery carousel buttons
 const galleryNextButton = document.querySelector('.gallery-carousel-button.next');
 const galleryPrevButton = document.querySelector('.gallery-carousel-button.prev');
-
 if (galleryNextButton) {
     galleryNextButton.addEventListener('click', slideGalleryNext);
 }
@@ -375,23 +380,62 @@ if (galleryPrevButton) {
 }
 
 let currentMap = null;
-
 function setupEventDetailsPage() {
     const urlParams = new URLSearchParams(window.location.search);
-    const eventId = urlParams.get('id'); // Obtener el ID del evento de la URL
+    const eventId = urlParams.get('id');
 
     const selectedEvent = eventsData.find(event => event.id === eventId);
-
     if (!selectedEvent) {
         console.error('Evento no encontrado para el ID:', eventId);
-        // Podrías redirigir a una página de error o mostrar un mensaje
         document.querySelector('.event-details-content .container').innerHTML = '<h2 style="text-align:center; color:var(--color-off-white);">Evento no encontrado.</h2>';
+        return;
+    }
+
+    // --- LÓGICA PARA SELECCIONAR EL PRECIO CORRECTO (PREVENTA O REGULAR) ---
+    const currentDate = new Date();
+    let activeTicket = null;
+    
+    // Buscar la preventa activa
+    if (selectedEvent.presaleStages) {
+        for (const stage of selectedEvent.presaleStages) {
+            // Se compara la fecha y la hora actual con la fecha de finalización de la preventa
+            if (currentDate < stage.endDate) {
+                activeTicket = stage;
+                break; // Detenerse en la primera preventa activa que aún no ha expirado
+            }
+        }
+    }
+    
+    // Si no hay preventas activas, usar el precio regular
+    if (!activeTicket && selectedEvent.regularPrice) {
+        activeTicket = selectedEvent.regularPrice;
+    }
+
+    // Si no hay ningún precio definido, usar el array de tickets normal
+    if (!activeTicket && selectedEvent.tickets && selectedEvent.tickets.length > 0) {
+        activeTicket = selectedEvent.tickets[0];
+    }
+
+    // Si aún no hay un precio, mostrar un mensaje
+    if (!activeTicket) {
+        console.error('No se encontraron precios para este evento.');
+        const ticketTypesContainer = document.getElementById('ticket-types-container');
+        if (ticketTypesContainer) {
+             ticketTypesContainer.innerHTML = '<p class="text-center">No hay entradas disponibles en este momento.</p>';
+        }
+        const purchaseBtn = document.querySelector('.purchase-btn');
+        if (purchaseBtn) {
+            purchaseBtn.disabled = true;
+        }
+        const totalPriceSpan = document.getElementById('total-price');
+        if (totalPriceSpan) {
+            totalPriceSpan.textContent = 'S/ 0.00';
+        }
         return;
     }
 
     // Rellenar el contenido de la página con los datos del evento
     document.title = `Detalles del Evento - ${selectedEvent.title}`;
-    // Si tienes un elemento con ID 'event-detail-title' para el título principal de la página de detalles
     const pageTitleElement = document.getElementById('event-detail-title');
     if (pageTitleElement) {
         pageTitleElement.textContent = `Detalles del Evento - ${selectedEvent.title}`;
@@ -406,26 +450,27 @@ function setupEventDetailsPage() {
     document.getElementById('organizer-name').textContent = selectedEvent.organizer;
     document.getElementById('event-detail-city').textContent = selectedEvent.city;
     document.getElementById('event-detail-full-address').textContent = selectedEvent.fullAddress;
-
-    // Generar los tipos de tickets dinámicamente
+    
+    // Generar el tipo de ticket dinámicamente (solo el activo)
     const ticketTypesContainer = document.getElementById('ticket-types-container');
-    ticketTypesContainer.innerHTML = ''; // Limpiar cualquier contenido previo
-
-    selectedEvent.tickets.forEach((ticket, index) => {
+    if (ticketTypesContainer) {
+        ticketTypesContainer.innerHTML = '';
+    
         const ticketDiv = document.createElement('div');
         ticketDiv.classList.add('ticket-type');
         ticketDiv.innerHTML = `
-            <span class="ticket-name">${ticket.name}</span>
-            <span class="ticket-price">S/ ${ticket.price.toFixed(2)}</span>
+            <span class="ticket-name">${activeTicket.name}</span>
+            <span class="ticket-price">S/ ${activeTicket.price.toFixed(2)}</span>
             <div class="quantity-selector">
-                <button class="quantity-btn minus-btn" data-type="ticket-${index}">-</button>
-                <input type="number" value="0" min="0" class="ticket-quantity" id="ticket-quantity-ticket-${index}" data-price="${ticket.price}">
-                <button class="quantity-btn plus-btn" data-type="ticket-${index}">+</button>
+                <button class="quantity-btn minus-btn" data-type="ticket-0">-</button>
+                <input type="number" value="0" min="0" class="ticket-quantity" id="ticket-quantity-ticket-0" data-price="${activeTicket.price}">
+                <button class="quantity-btn plus-btn" data-type="ticket-0">+</button>
             </div>
         `;
         ticketTypesContainer.appendChild(ticketDiv);
-    });
-
+    }
+    // --- FIN DE LA LÓGICA PARA MOSTRAR EL PRECIO DINÁMICO ---
+    
     const totalPriceSpan = document.getElementById('total-price');
     const purchaseBtn = document.querySelector('.purchase-btn');
     const discountToggle = document.querySelector('.discount-toggle');
@@ -435,7 +480,6 @@ function setupEventDetailsPage() {
     const viewMapLink = document.getElementById('view-map-link');
 
     let total = 0;
-
     function calculateTotal() {
         total = 0;
         document.querySelectorAll('.ticket-quantity').forEach(input => {
@@ -445,9 +489,11 @@ function setupEventDetailsPage() {
                 total += price * quantity;
             }
         });
-        totalPriceSpan.textContent = `S/ ${total.toFixed(2)}`;
+        if (totalPriceSpan) {
+            totalPriceSpan.textContent = `S/ ${total.toFixed(2)}`;
+        }
     }
-    
+
     // --- NUEVO CÓDIGO AÑADIDO: Formulario de datos personales ---
     const ticketPurchaseCard = document.querySelector('.ticket-purchase-card');
     const userDetailsContainer = document.createElement('div');
@@ -507,7 +553,7 @@ function setupEventDetailsPage() {
 
     if (purchaseBtn) {
         purchaseBtn.addEventListener('click', () => {
-             // Validación de entradas seleccionadas
+            // Validación de entradas seleccionadas
             if (total === 0) {
                 alert('Por favor, selecciona al menos una entrada para comprar.');
                 return;
@@ -543,8 +589,8 @@ function setupEventDetailsPage() {
             document.querySelectorAll('.ticket-quantity').forEach((input, index) => {
                 const quantity = parseInt(input.value);
                 if (quantity > 0) {
-                    const ticketName = selectedEvent.tickets[index].name;
-                    const ticketPrice = selectedEvent.tickets[index].price;
+                    const ticketName = activeTicket.name; // Usamos el nombre del ticket activo
+                    const ticketPrice = activeTicket.price; // Usamos el precio del ticket activo
                     orderDetails.push(`${quantity}x ${ticketName} (S/ ${ticketPrice.toFixed(2)})`);
                 }
             });
@@ -614,8 +660,8 @@ Hola, estoy interesado en comprar entradas para este evento.
         
         // Actualizar enlace de Google Maps
         if (viewMapLink) {
-            // El enlace que me proporcionaste es incorrecto, lo he corregido a un formato más estándar.
-            viewMapLink.href = `https://www.google.com/maps/search/?api=1&query=${selectedEvent.mapCoords[0]},${selectedEvent.mapCoords[1]}`;
+            // Se ha corregido la URL de Google Maps para que sea funcional
+            viewMapLink.href = `http://maps.google.com/?q=${selectedEvent.mapCoords[0]},${selectedEvent.mapCoords[1]}`;
         }
     }
 }
@@ -730,7 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDots(currentIndex); // Ensure the first dot is active on load
             startAutoSlide();
         } else {
-             console.warn("Hero carousel elements not found. Hero carousel functionality will not work.");
+            console.warn("Hero carousel elements not found. Hero carousel functionality will not work.");
         }
 
         if (galleryCarouselTrack && galleryCarouselSlides.length > 0) {
