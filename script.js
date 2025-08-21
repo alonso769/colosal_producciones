@@ -596,7 +596,7 @@ function setupEventDetailsPage() {
             // --- Generación del mensaje para WhatsApp ---
             
             // Número de teléfono de la empresa para WhatsApp
-            const whatsappNumber = '51984291729'; 
+            const whatsappNumber = '51940615061'; 
 
             // Recopilar los detalles de la compra
             const orderDetails = [];
