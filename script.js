@@ -4,27 +4,41 @@
 const eventsData = [
     {
         id: 'band-event-1',
-        title: 'Concierto Exclusivo: Banda de Rock Peruana',
+        title: '🔥 ¡Chester vs Emily en Lince! 🔥',
         image: 'images/band-event-1.jpg',
         dateTime: '28 JUL. 2025 - 09:00 PM',
         address: 'Barranco Arena',
         city: 'Lima, PE',
         fullAddress: 'Av. Bolognesi 123, Barranco',
-        description: `Prepárate para una noche inolvidable con la banda de rock peruana más aclamada del momento. Disfruta de sus grandes éxitos y nuevas canciones en un ambiente vibrante. Un espectáculo lleno de energía y pasión por la música.`,
-        additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.`,
+        description: `Prepárate para una noche épica: dos shows completos tributo a LINKIN PARK como nunca antes.
+
+🎤El álbum "From Zero" por @hybridtheoryoficial.pe vs el álbum "Hybrid Theory" por @chazy.tributoalp — en las previas a la llegada de la banda a Lima.
+
+Pero eso no es todo…
+⚡ Tributo a System of a Down – @mtvnu.metal
+⚡ Tributo a Limp Bizkit – @mtvnu.metal
+⚡ Tributo a Bad Omens – @badomens.tributo
+⚡ Banda invitada: @infragta
+
+📅 Fecha: Sábado 13 de septiembre
+📍 Lugar: Iwanna Rock – 3er piso, Jr. Mariscal Las Heras 219, Lince
+🎟 Entradas: https://wa.link/sznw3i o al 📲 940 615 061
+🎬 Produce: Colosal Producciones`,
+        additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
+        PRECIO EN PUERTA S/35.00`,
         
         // --- NUEVA ESTRUCTURA DE PREVENTAS (ADAPTADO CON HORAS PARA PRUEBA) ---
         // Aquí defines las etapas de preventa con su precio y fecha de finalización
         // La fecha debe ser un objeto Date para poder compararla
         presaleStages: [
             // PRUEBA 1: Esta preventa ya ha pasado (17:20:00). No debería mostrarse.
-            { name: 'Preventa 1', price: 90.00, endDate: new Date('2025-08-13T17:20:00') },
+            { name: 'Preventa 1', price: 20.00, endDate: new Date('2025-08-24T11:59:00') },
             // PRUEBA 2: Esta preventa es la activa en este momento (hasta las 17:30:00).
             { name: 'Preventa 2', price: 100.00, endDate: new Date('2025-08-13T17:50:00') },
             // PRUEBA 3: Esta preventa se activará después de las 17:30:00.
             { name: 'Preventa 3', price: 114.00, endDate: new Date('2025-08-13T17:52:00') }
         ],
-        regularPrice: { name: 'Entrada General', price: 120.00 }, // Precio que se activa después de las preventas
+        regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
         
         organizer: 'Colosal Producciones',
         mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
