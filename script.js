@@ -593,7 +593,7 @@ function setupEventDetailsPage() {
                 return;
             }
             
-            // --- Generación del mensaje para WhatsApp ---
+            // --- Generación del mensaje para WhatsApp ----
             
             // Número de teléfono de la empresa para WhatsApp
             const whatsappNumber = '51940615061'; 
