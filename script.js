@@ -6,10 +6,10 @@ const eventsData = [
         id: 'band-event-1',
         title: '🔥 ¡Chester vs Emily en Lince! 🔥',
         image: 'images/band-event-1.jpg',
-        dateTime: '28 JUL. 2025 - 09:00 PM',
-        address: 'Barranco Arena',
-        city: 'Lima, PE',
-        fullAddress: 'Av. Bolognesi 123, Barranco',
+        dateTime: '13 SEP. 2025 - 09:00 PM',
+        address: 'IWANNA ROCK BAR',
+        city: 'Lince, PE',
+        fullAddress: 'IWANNA ROCK BAR',
         description: `Prepárate para una noche épica: dos shows completos tributo a LINKIN PARK como nunca antes.
 
 🎤El álbum "From Zero" por @hybridtheoryoficial.pe vs el álbum "Hybrid Theory" por @chazy.tributoalp — en las previas a la llegada de la banda a Lima.
