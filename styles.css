@@ -336,19 +336,27 @@ body {
 }
 
 .upcoming-event-card .event-date {
-    padding: 10px 15px 5px;
-    text-align: center;
+    background: #F5F5DC;
+    color: var(--color-black);
+    padding: 12px;
+    margin: 0;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--color-pastel-purple); /* Texto morado pastel */
+    min-height: 50px;                 /* 🔥 misma altura en todas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .upcoming-event-card .event-location {
-    padding: 0 15px 15px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--color-off-white); /* Texto blanco hueso */
+    margin: 8px 0 12px;
+    font-size: 0.95rem;
     font-weight: 500;
+    color: var(--color-off-white);
+    min-height: 28px;                /* 🔥 asegura mismo espacio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .upcoming-event-card .view-concert-btn {
@@ -1274,21 +1282,37 @@ input[type="number"]::-webkit-inner-spin-button {
     box-sizing: border-box;
 }
 
+/* Ajustes para las tarjetas Colosal */
 .colosal-event-card .event-date {
-    padding: 10px 15px 5px;
-    text-align: center;
+    background: #F5F5DC;   /* 🔥 cartel beige como arriba */
+    color: var(--color-black);            /* 🔥 texto en negro */
+    padding: 12px;
+    margin: 0;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--color-pastel-purple);
+    min-height: 50px;                     /* 🔥 altura mínima igual */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .colosal-event-card .event-location {
-    padding: 0 15px 15px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--color-off-white);
+    margin: 8px 0 12px;
+    font-size: 0.95rem;
     font-weight: 500;
+    color: var(--color-black);        /* se queda blanco/gris clarito */
+    min-height: 28px;                     /* 🔥 asegura misma altura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.cartel a {
+  color: #000000 !important;   /* Negro */
+  font-weight: bold !important; /* Negrita */
+  text-decoration: none;       /* Sin subrayado */
+}
+
 
 .colosal-event-card .view-concert-btn {
     margin: 0 15px 15px;
