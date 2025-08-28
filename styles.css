@@ -348,12 +348,13 @@ body {
     justify-content: center;
 }
 
+/* Estilo para el nombre del local */
 .upcoming-event-card .event-location {
-    margin: 8px 0 12px;
+    margin: 4px 0 8px;
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--color-off-white);
-    min-height: 28px;                /* 🔥 asegura mismo espacio */
+    min-height: 20px; /* Reducido para eliminar el espacio extra */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1296,15 +1297,23 @@ input[type="number"]::-webkit-inner-spin-button {
     justify-content: center;
 }
 
+/* Estilo para el nombre del local */
 .colosal-event-card .event-location {
-    margin: 8px 0 12px;
+    margin: 2px 0 0px !important; /* Margen inferior en 0 para eliminar el espacio de abajo */
     font-size: 0.95rem;
     font-weight: 500;
-    color: var(--color-black);        /* se queda blanco/gris clarito */
-    min-height: 28px;                     /* 🔥 asegura misma altura */
+    color: var(--color-black);
+    min-height: 16px; 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Estilo para el botón "Ver Concierto" */
+.colosal-event-card .view-concert-btn {
+    margin-top: 0 !important; /* Asegura que no tenga ningún margen superior */
+    padding-top: 6px; /* Reducido ligeramente el padding superior del botón */
+    padding-bottom: 6px; /* Reducido ligeramente el padding inferior del botón */
 }
 
 .cartel a {
