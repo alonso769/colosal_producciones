@@ -1299,7 +1299,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* Estilo para el nombre del local */
 .colosal-event-card .event-location {
-    margin: 2px 0 0px !important; /* Margen inferior en 0 para eliminar el espacio de abajo */
+    margin: 2px 0 0px !important; /* Mantiene el margen inferior en 0 */
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--color-black);
@@ -1311,9 +1311,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* Estilo para el botón "Ver Concierto" */
 .colosal-event-card .view-concert-btn {
-    margin-top: 0 !important; /* Asegura que no tenga ningún margen superior */
-    padding-top: 6px; /* Reducido ligeramente el padding superior del botón */
-    padding-bottom: 6px; /* Reducido ligeramente el padding inferior del botón */
+    margin-top: 0 !important; /* Se asegura de que no haya margen superior */
+    padding-top: 4px; /* Reducido a 4px para subirlo más */
+    padding-bottom: 4px; /* Reducido a 4px para subirlo más */
 }
 
 .cartel a {
