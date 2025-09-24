@@ -1618,7 +1618,7 @@ body {
 }
 
 .colosal-event-card .event-location {
-    padding: 0 15px 15px;
+    padding: 2 15px 0px;
     font-size: 0.9rem;
     color: var(--color-off-white);
     font-weight: 500;
