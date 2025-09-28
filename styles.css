@@ -349,7 +349,7 @@ body {
 }
 
 .upcoming-event-card .event-location {
-    margin: 4px 0 8px;
+    margin: 4px 0 4px;
     /* --- CAMBIO CLAVE AQUÍ --- */
     font-size: 0.85rem; /* El tamaño de fuente original era 0.95rem */
     font-weight: 500;
