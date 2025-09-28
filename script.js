@@ -4,7 +4,7 @@
 const eventsData = [
     {
         id: 'band-event-1',
-        title: '🔥 ¡Chester vs Emily en Lince! 🔥',
+        title: '',
         image: 'images/band-event-1.jpg',
         dateTime: '13 SEP. 2025 - 09:00 PM',
         address: 'IWANNA ROCK BAR',
@@ -45,14 +45,15 @@ Pero eso no es todo…
     },
     {
         id: 'band-event-2',
-        title: 'Festival Andino de Rock',
+        title: '',
         image: 'images/band-event-2.jpg',
         dateTime: '15 AGO. 2025 - 07:00 PM',
         address: 'Teatro Municipal',
         city: 'Cusco, PE',
         fullAddress: 'Calle Mesón de la Estrella 149, Cusco',
         description: `Un festival que fusiona el rock con sonidos andinos, presentando a bandas emergentes y consolidadas de la región. Una experiencia cultural y musical única en el corazón del Cusco.`,
-        additionalInfo: `Evento apto para todas las edades. Menores de 12 años deben ingresar con un adulto. Prohibido el ingreso de alimentos y bebidas.`,
+        additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
+        PRECIO EN PUERTA S/35.00`,
         tickets: [
             { name: 'Zona Platea', price: 70.00 },
             { name: 'Zona Balcón', price: 50.00 }
@@ -69,7 +70,8 @@ Pero eso no es todo…
         city: 'Arequipa, PE',
         fullAddress: 'Av. Ejército s/n, Arequipa',
         description: `Las mejores bandas de rock de Arequipa se unen para una noche épica bajo el majestuoso volcán Misti. Cerveza, música y mucha energía.`,
-        additionalInfo: `Se requiere DNI para el ingreso. Prohibido el ingreso de botellas de vidrio. Zonas de comida y bebida disponibles.`,
+        additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
+        PRECIO EN PUERTA S/35.00`,
         tickets: [
             { name: 'General', price: 60.00 },
             { name: 'Preferencial', price: 100.00 }
@@ -86,7 +88,8 @@ Pero eso no es todo…
         city: 'Trujillo, PE',
         fullAddress: 'Av. Gerónimo de la Torre s/n, Trujillo',
         description: `Un festival dedicado al metal en Trujillo. Bandas nacionales e internacionales se darán cita para una descarga de potencia sonora.`,
-        additionalInfo: `No se permite el ingreso de objetos punzocortantes. Se verificará la edad al ingreso.`,
+        additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
+        PRECIO EN PUERTA S/35.00`,
         tickets: [
             { name: 'Campo', price: 85.00 },
             { name: 'Gradería', price: 65.00 }
