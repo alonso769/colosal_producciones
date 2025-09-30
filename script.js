@@ -6,8 +6,8 @@ const eventsData = [
         id: 'band-event-1',
         title: '',
         image: 'images/band-event-1.jpg',
-        dateTime: '13 SEP. 2025 - 09:00 PM',
-        address: 'IWANNA ROCK BAR',
+        dateTime: '',
+        address: '',
         city: 'Lince, PE',
         fullAddress: 'IWANNA ROCK BAR',
         description: `Prepárate para una noche épica: dos shows completos tributo a LINKIN PARK como nunca antes.
@@ -44,40 +44,75 @@ Pero eso no es todo…
         mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
-        id: 'band-event-2',
+        id: 'band-event-3',
         title: '',
-        image: 'images/band-event-2.jpg',
-        dateTime: '15 AGO. 2025 - 07:00 PM',
-        address: 'Teatro Municipal',
+        image: 'images/band-event-3.png',
+        dateTime: '',
+        address: '',
         city: 'Cusco, PE',
         fullAddress: 'Calle Mesón de la Estrella 149, Cusco',
-        description: `Un festival que fusiona el rock con sonidos andinos, presentando a bandas emergentes y consolidadas de la región. Una experiencia cultural y musical única en el corazón del Cusco.`,
+        description: `🎤✨ ¡La nostalgia emo-punk se apodera de Miraflores! 🔥
+        NOSTALGIK AS F**K Vol. I llega con una noche llena de recuerdos y un tributo extenso a PARAMORE a cargo de @thefirst.pe
+        Pero eso no es todo… 👇 ❌ Twenty One Pilots x @helloclancytop ❌ Kudai x @revuelo_kudaioficial ❌ Emo Punk Hits 2000’s x @naf.emohits (P!ATD, FOB, PXNDX, All Time Low, The Veronicas, Avril Lavigne, Tokio Hotel, The Rasmus y más).
+        📅 Sábado 11 de octubre 📍 McCarthy’s Irish Pub – Miraflores 🍻 Consumo mínimo: S/25
+        `,
         additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
         PRECIO EN PUERTA S/35.00`,
-        tickets: [
-            { name: 'Zona Platea', price: 70.00 },
-            { name: 'Zona Balcón', price: 50.00 }
+         // --- NUEVA ESTRUCTURA DE PREVENTAS (ADAPTADO CON HORAS PARA PRUEBA) ---
+        // Aquí defines las etapas de preventa con su precio y fecha de finalización
+        // La fecha debe ser un objeto Date para poder compararla
+        presaleStages: [
+            // PRUEBA 1: Esta preventa ya ha pasado (17:20:00). No debería mostrarse.
+            { name: 'Preventa 1', price: 20.00, endDate: new Date('2025-08-24T11:59:00') },
+            // PRUEBA 2: Esta preventa es la activa en este momento (hasta las 17:30:00).
+            { name: 'Preventa 2', price: 100.00, endDate: new Date('2025-08-13T17:50:00') },
+            // PRUEBA 3: Esta preventa se activará después de las 17:30:00.
+            { name: 'Preventa 3', price: 114.00, endDate: new Date('2025-08-13T17:52:00') }
         ],
+        regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
+        
         organizer: 'Colosal Producciones',
-        mapCoords: [-13.5167, -71.9778] // Coordenadas de Teatro Municipal Cusco (ejemplo)
+        mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
-        id: 'band-event-3',
-        title: 'Rock bajo el Misti',
-        image: 'images/band-event-3.jpg',
-        dateTime: '03 SEP. 2025 - 08:30 PM',
-        address: 'Jardín de la Cerveza',
+        id: 'band-event-2',
+        title: '',
+        image: 'images/band-event-2.png',
+        dateTime: '',
+        address: '',
         city: 'Arequipa, PE',
         fullAddress: 'Av. Ejército s/n, Arequipa',
-        description: `Las mejores bandas de rock de Arequipa se unen para una noche épica bajo el majestuoso volcán Misti. Cerveza, música y mucha energía.`,
+        description: `En esta noche oscura, donde los recuerdos nunca mueren… 🔥
+Prepárate para un ritual emo y oscuro, con un show extenso de PXNDX a cargo de @nxrcicistx.pe, que hará llorar hasta a los fantasmas de tu adolescencia.
+Y la noche continúa con: 👇
+❌ Alesana x @icarus.alesanatribute
+❌ Marilyn Manson x @mechanichalanimals
+❌ Emo Hits 2000’s x @naf.emohits (P!ATD, FOB, All Time Low, Avril Lavigne, Tokio Hotel y más)
+❌ @wethemonster_
+
+📅 Sábado 1 de noviembre
+📍 Iwanna Rock – Jirón Mariscal Las Heras 219, Lince
+🍻 Consumo mínimo S/30
+
+🔥 Ven disfrazado y sé parte de esta fiesta donde Halloween se une al Día de Muertos… La noche emo más intensa del año te espera!
+        `,
         additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
         PRECIO EN PUERTA S/35.00`,
-        tickets: [
-            { name: 'General', price: 60.00 },
-            { name: 'Preferencial', price: 100.00 }
+         // --- NUEVA ESTRUCTURA DE PREVENTAS (ADAPTADO CON HORAS PARA PRUEBA) ---
+        // Aquí defines las etapas de preventa con su precio y fecha de finalización
+        // La fecha debe ser un objeto Date para poder compararla
+        presaleStages: [
+            // PRUEBA 1: Esta preventa ya ha pasado (17:20:00). No debería mostrarse.
+            { name: 'Preventa 1', price: 20.00, endDate: new Date('2025-08-24T11:59:00') },
+            // PRUEBA 2: Esta preventa es la activa en este momento (hasta las 17:30:00).
+            { name: 'Preventa 2', price: 100.00, endDate: new Date('2025-08-13T17:50:00') },
+            // PRUEBA 3: Esta preventa se activará después de las 17:30:00.
+            { name: 'Preventa 3', price: 114.00, endDate: new Date('2025-08-13T17:52:00') }
         ],
+        regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
+        
         organizer: 'Colosal Producciones',
-        mapCoords: [-16.3989, -71.5369] // Coordenadas del Jardín de la Cerveza (ejemplo)
+        mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
         id: 'band-event-4',
@@ -830,3 +865,45 @@ window.addEventListener('resize', () => {
         setupGalleryCarousel(); // This already handles resize logic for gallery
     }
 });
+
+// Función para obtener el valor de un parámetro específico de la URL (ej. el 'id')
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+// Función principal para cargar los detalles del evento
+function loadEventDetails() {
+    // 1. Obtener el ID del evento de la URL
+    var eventId = getUrlParameter('id'); 
+    
+    // 2. Definir los nombres de los eventos según el ID
+    var eventNames = {
+        "band-event-1": "Chester vs Emili",
+        "band-event-2": "Emo Party Vol 3",
+        "band-event-3": "Nostalgik As F*k Vol 1",
+        // Puedes agregar más eventos aquí:
+        // "band-event-4": "Concierto Banda Trujillo" 
+    };
+
+    // 3. Buscar el nombre del evento
+    var eventTitle = eventNames[eventId];
+
+    // 4. Mostrar el nombre si el ID es válido
+    if (eventTitle) {
+        // Encontrar el elemento <h3> por su ID
+        var titleElement = document.getElementById('event-title-display');
+        
+        // Si el elemento existe en la página
+        if (titleElement) {
+            // Reemplazar el texto de "Descripción del Evento" por el nombre real
+            titleElement.textContent = eventTitle; 
+        }
+    }
+}
+
+// Asegúrate de que esta función se ejecute cuando la página cargue
+// Si tu archivo JS se incluye al final del body, esto funcionará:
+loadEventDetails();
