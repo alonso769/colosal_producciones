@@ -8,8 +8,8 @@ const eventsData = [
         image: 'images/band-event-1.jpg',
         dateTime: '',
         address: '',
-        city: 'Lince, PE',
-        fullAddress: 'IWANNA ROCK BAR',
+        city: 'Miraflores, PE',
+        fullAddress: 'C. 2 de Mayo 220, Miraflores 15074',
         description: `Prepárate para una noche épica: dos shows completos tributo a LINKIN PARK como nunca antes.
 
 🎤El álbum "From Zero" por @hybridtheoryoficial.pe vs el álbum "Hybrid Theory" por @chazy.tributoalp — en las previas a la llegada de la banda a Lima.
@@ -41,7 +41,7 @@ Pero eso no es todo…
         regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
         
         organizer: 'Colosal Producciones',
-        mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
+        mapCoords: [-12.08615, -77.03424] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
         id: 'band-event-3',
@@ -49,8 +49,8 @@ Pero eso no es todo…
         image: 'images/band-event-3.png',
         dateTime: '',
         address: '',
-        city: 'Cusco, PE',
-        fullAddress: 'Calle Mesón de la Estrella 149, Cusco',
+        city: 'Lince, PE',
+        fullAddress: 'Jr, Mariscal Las Heras 219, Lince',
         description: `🎤✨ ¡La nostalgia emo-punk se apodera de Miraflores! 🔥
         NOSTALGIK AS F**K Vol. I llega con una noche llena de recuerdos y un tributo extenso a PARAMORE a cargo de @thefirst.pe
         Pero eso no es todo… 👇 ❌ Twenty One Pilots x @helloclancytop ❌ Kudai x @revuelo_kudaioficial ❌ Emo Punk Hits 2000’s x @naf.emohits (P!ATD, FOB, PXNDX, All Time Low, The Veronicas, Avril Lavigne, Tokio Hotel, The Rasmus y más).
@@ -72,7 +72,7 @@ Pero eso no es todo…
         regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
         
         organizer: 'Colosal Producciones',
-        mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
+        mapCoords: [-12.11769, -77.03056] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
         id: 'band-event-2',
@@ -80,8 +80,8 @@ Pero eso no es todo…
         image: 'images/band-event-2.png',
         dateTime: '',
         address: '',
-        city: 'Arequipa, PE',
-        fullAddress: 'Av. Ejército s/n, Arequipa',
+        city: 'Miraflores, PE',
+        fullAddress: 'C. 2 de Mayo 220, Miraflores 15074',
         description: `En esta noche oscura, donde los recuerdos nunca mueren… 🔥
 Prepárate para un ritual emo y oscuro, con un show extenso de PXNDX a cargo de @nxrcicistx.pe, que hará llorar hasta a los fantasmas de tu adolescencia.
 Y la noche continúa con: 👇
@@ -109,28 +109,37 @@ Y la noche continúa con: 👇
             // PRUEBA 3: Esta preventa se activará después de las 17:30:00.
             { name: 'Preventa 3', price: 114.00, endDate: new Date('2025-08-13T17:52:00') }
         ],
-        regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
+        regularPrice: { name: 'Entrada General', price: 30.00 }, // Precio que se activa después de las preventas
         
         organizer: 'Colosal Producciones',
-        mapCoords: [-12.1490, -77.0250] // Coordenadas de Barranco Arena (ejemplo)
+        mapCoords: [-12.08615, -77.03424] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
         id: 'band-event-4',
-        title: 'Trujillo Metal Fest',
-        image: 'images/band-event-4.jpg',
-        dateTime: '20 SEP. 2025 - 07:00 PM',
-        address: 'Coliseo Gran Chimú',
-        city: 'Trujillo, PE',
-        fullAddress: 'Av. Gerónimo de la Torre s/n, Trujillo',
-        description: `Un festival dedicado al metal en Trujillo. Bandas nacionales e internacionales se darán cita para una descarga de potencia sonora.`,
+        title: '',
+        image: 'images/band-event-4.png',
+        dateTime: '',
+        address: '',
+        city: 'Lince, PE',
+        fullAddress: 'Jr, Mariscal Las Heras 219, Lince',
+       description: `Proximamente`,
         additionalInfo: `Las puertas abren a las 8:00 PM. Se recomienda llegar temprano. Consumo de alcohol solo para mayores de 18 años con DNI. No se permite el ingreso con bebidas ni alimentos.
         PRECIO EN PUERTA S/35.00`,
-        tickets: [
-            { name: 'Campo', price: 85.00 },
-            { name: 'Gradería', price: 65.00 }
+         // --- NUEVA ESTRUCTURA DE PREVENTAS (ADAPTADO CON HORAS PARA PRUEBA) ---
+        // Aquí defines las etapas de preventa con su precio y fecha de finalización
+        // La fecha debe ser un objeto Date para poder compararla
+        presaleStages: [
+            // PRUEBA 1: Esta preventa ya ha pasado (17:20:00). No debería mostrarse.
+            { name: 'Preventa 1', price: 20.00, endDate: new Date('2025-08-24T11:59:00') },
+            // PRUEBA 2: Esta preventa es la activa en este momento (hasta las 17:30:00).
+            { name: 'Preventa 2', price: 100.00, endDate: new Date('2025-08-13T17:50:00') },
+            // PRUEBA 3: Esta preventa se activará después de las 17:30:00.
+            { name: 'Preventa 3', price: 114.00, endDate: new Date('2025-08-13T17:52:00') }
         ],
+        regularPrice: { name: 'Entrada General', price: 25.00 }, // Precio que se activa después de las preventas
+        
         organizer: 'Colosal Producciones',
-        mapCoords: [-8.1065, -79.0305] // Coordenadas del Coliseo Gran Chimú (ejemplo)
+        mapCoords: [-12.11769, -77.03056] // Coordenadas de Barranco Arena (ejemplo)
     },
     {
         id: 'band-event-5',
